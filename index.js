@@ -14,8 +14,10 @@ Go code!
 */
 
 // make server
-// import express and routers
+// import express, routers, middleware
 const express = require('express');
+const logger = require('./middleware/logger');
+const error = require('./middleware/error');
 
 // define potential env variables
 const port = 8000;
@@ -25,6 +27,8 @@ const server = express();
 
 // add middleware
 server.use(express.json());
+server.use(logger());
+server.use(error());
 
 server.get("/", (req, res) => {
     res.json({
