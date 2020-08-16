@@ -7,6 +7,15 @@ const router = express.Router();
 
 // create endpoints
 // get all projects - no body required
+router.get("/", (req, res) => {
+    project.get()
+        .then(projects => {
+            res.json(projects);
+        })
+        .catch(error => {
+            next(error);
+        });
+});
 
 // get project by id - id required
 

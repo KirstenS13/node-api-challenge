@@ -18,6 +18,7 @@ Go code!
 const express = require('express');
 const logger = require('./middleware/logger');
 const error = require('./middleware/error');
+const projectsRouter = require('./projects/projectsRouter');
 
 // define potential env variables
 const port = 8000;
@@ -30,6 +31,10 @@ server.use(express.json());
 server.use(logger());
 server.use(error());
 
+// bring in routers
+server.use( '/projects', projectsRouter);
+
+// welcome endpoint
 server.get("/", (req, res) => {
     res.json({
         message: "Hi, it's me the server. I'm working."
