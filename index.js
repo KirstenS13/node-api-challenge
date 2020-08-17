@@ -19,6 +19,7 @@ const express = require('express');
 const logger = require('./middleware/logger');
 const error = require('./middleware/error');
 const projectsRouter = require('./projects/projectsRouter');
+const actionsRouter = require('./actions/actionsRouter');
 
 // define potential env variables
 const port = 8000;
@@ -32,7 +33,8 @@ server.use(logger());
 server.use(error());
 
 // bring in routers
-server.use( '/projects', projectsRouter);
+server.use('/projects', projectsRouter);
+server.use('/projects/:id/actions', actionsRouter);
 
 // welcome endpoint
 server.get("/", (req, res) => {
