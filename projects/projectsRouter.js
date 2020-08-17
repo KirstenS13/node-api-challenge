@@ -1,6 +1,7 @@
-// import express and helper
+// import express, helper, middleware
 const express = require('express');
 const project = require('../data/helpers/projectModel');
+const { validateProjectId } = require('../middleware/project');
 
 // create router
 const router = express.Router();
@@ -18,14 +19,8 @@ router.get("/", (req, res) => {
 });
 
 // get project by id - id required
-router.get("/:id", (req, res) => {
-    project.get(req.params.id)
-        .then(project => {
-            res.json(project);
-        })
-        .catch(error => {
-            next(error);
-        });
+router.get("/:id", validateProjectId(), (req, res) => {
+    res.json(req.project);
 });
 
 // create new project - name & description (str) required, completed boolean optional
