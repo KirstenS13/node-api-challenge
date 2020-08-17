@@ -37,6 +37,23 @@ router.put("/projects/:id/actions/:actionId", validateActionBody(), validateProj
 });
 
 // delete action - proj id req
+router.delete("/projects/:id/actions/:actionId", validateProjectId(), validateActionId(), (req, res) => {
+    action.remove(req.params.actionId)
+        .then(result => {
+            if (result === 1) {
+                res.json({
+                    message: "Action successfully deleted"
+                });
+            } else {
+                res.status(500).json({
+                    message: "Something went wrong, please try again later."
+                });
+            };
+        })
+        .catch(error => {
+            next(error);
+        });
+});
 
 // export router
 module.exports = router;
