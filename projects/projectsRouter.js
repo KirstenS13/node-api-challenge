@@ -46,6 +46,23 @@ router.put("/:id", validateProjectBody(), validateProjectId(), (req, res) => {
 });
 
 // delete project - id required
+router.delete("/:id", validateProjectId(), (req, res) => {
+    project.remove(req.params.id)
+        .then(result => {
+            if (result === 1) {
+                res.json({
+                    message: "Project successfully deleted"
+                });
+            } else {
+                res.status(500).json({
+                    message: "Something went wrong, please try again later."
+                });
+            };
+        })
+        .catch(error => {
+            next(error);
+        });
+});
 
 // export router
 module.exports = router;
