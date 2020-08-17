@@ -1,6 +1,6 @@
 // import express, helper, middleware
 const express = require('express');
-const project = require('../data/helpers/actionModel');
+const action = require('../data/helpers/actionModel');
 const { validateProjectId } = require('../middleware/project');
 const { validateActionId, validateActionBody } = require('../middleware/action');
 
@@ -9,11 +9,20 @@ const router = express.Router();
 
 // create endpoints
 // get action by action id - proj id, action id req
-router.get("/:actionId", validateProjectId(), validateActionId(), (req, res) => {
+router.get("/projects/:id/actions/:actionId", validateProjectId(), validateActionId(), (req, res) => {
     res.json(req.action);
 });
 
 // add action - proj id, action description & notes req
+router.post("/projects/:id/actions", validateActionBody(), validateProjectId(), (req, res) => {
+    action.insert(req.body)
+        .then(newAction => {
+            res.status(201).json(newAction);
+        })
+        .catch(error => {
+            next(error);
+        });
+});
 
 // update action - proj id, action id & description & notes req
 

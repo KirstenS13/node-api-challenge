@@ -34,7 +34,7 @@ server.use(error());
 
 // bring in routers
 server.use('/projects', projectsRouter);
-server.use('/projects/:id/actions', actionsRouter);
+server.use(actionsRouter);
 
 // welcome endpoint
 server.get("/", (req, res) => {

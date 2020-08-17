@@ -20,7 +20,19 @@ function validateActionId() {
 };
 
 function validateActionBody() {
-
+    return (req, res, next) => {
+        if (!req.body) {
+            res.status(400).json({
+                message: "Missing action information"
+            });
+        } else if (!req.body.description || !req.body.notes) {
+            res.status(400).json({
+                message: "Missing description or notes information"
+            });
+        } else {
+            next();
+        };
+    };
 };
 
 module.exports = {
