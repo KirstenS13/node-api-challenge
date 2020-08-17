@@ -25,6 +25,16 @@ router.post("/projects/:id/actions", validateActionBody(), validateProjectId(), 
 });
 
 // update action - proj id, action id & description & notes req
+router.put("/projects/:id/actions/:actionId", validateActionBody(), validateProjectId(), validateActionId(), (req, res) => {
+    action.update(req.params.actionId, req.body)
+        .then(updatedAction => {
+            console.log(updatedAction);
+            res.json(updatedAction);
+        })
+        .catch(error => {
+            next(error);
+        });
+});
 
 // delete action - proj id req
 
