@@ -21,7 +21,23 @@ function validateProjectId() {
 };
 
 // validate project body
+function validateProjectBody() {
+    return (req, res, next) => {
+        if (!req.body) {
+            res.status(400).json({
+                message: "Missing project information"
+            });
+        } else if (!req.body.name || !req.body.description) {
+            res.status(400).json({
+                message: "Missing name or description information"
+            });
+        } else {
+            next();
+        };
+    };
+};
 
 module.exports = {
-    validateProjectId
+    validateProjectId,
+    validateProjectBody
 }
