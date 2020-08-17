@@ -35,6 +35,15 @@ router.post("/", validateProjectBody(), (req, res) => {
 });
 
 // update project - id, name & description (str) required, completed boolean optional
+router.put("/:id", validateProjectBody(), validateProjectId(), (req, res) => {
+    project.update(req.params.id, req.body)
+        .then(updatedProject => {
+            res.json(updatedProject);
+        })
+        .catch(error => {
+            next(error);
+        });
+});
 
 // delete project - id required
 
