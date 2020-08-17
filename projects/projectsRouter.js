@@ -18,6 +18,15 @@ router.get("/", (req, res) => {
 });
 
 // get project by id - id required
+router.get("/:id", (req, res) => {
+    project.get(req.params.id)
+        .then(project => {
+            res.json(project);
+        })
+        .catch(error => {
+            next(error);
+        });
+});
 
 // create new project - name & description (str) required, completed boolean optional
 
