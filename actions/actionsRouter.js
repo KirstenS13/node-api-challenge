@@ -7,8 +7,6 @@ const project = require('../data/helpers/actionModel');
 const router = express.Router();
 
 // create endpoints
-// get all actions by project id - proj id req
-
 // get action by action id - proj id, action id req
 
 // add action - proj id, action description & notes req

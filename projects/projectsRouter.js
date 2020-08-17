@@ -64,5 +64,16 @@ router.delete("/:id", validateProjectId(), (req, res) => {
         });
 });
 
+// get all actions by project id - proj id req
+router.get("/:id/actions", validateProjectId(), (req, res) => {
+    project.getProjectActions(req.params.id)
+        .then(actions => {
+            res.json(actions);
+        })
+        .catch(error => {
+            next(error);
+        });
+});
+
 // export router
 module.exports = router;
