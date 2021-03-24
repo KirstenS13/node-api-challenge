@@ -12,3 +12,38 @@ I need this code, but don't know where, perhaps should make some middleware, don
 
 Go code!
 */
+
+// make server
+// import express, routers, middleware
+const express = require('express');
+const logger = require('./middleware/logger');
+const error = require('./middleware/error');
+const projectsRouter = require('./projects/projectsRouter');
+const actionsRouter = require('./actions/actionsRouter');
+
+// define potential env variables
+const port = 8000;
+
+// create server
+const server = express();
+
+// add middleware
+server.use(express.json());
+server.use(logger());
+server.use(error());
+
+// bring in routers
+server.use('/projects', projectsRouter);
+server.use(actionsRouter);
+
+// welcome endpoint
+server.get("/", (req, res) => {
+    res.json({
+        message: "Hi, it's me the server. I'm working."
+    });
+});
+
+// start the server
+server.listen(port, () => {
+    console.log("Server running on http://localhost:8000/");
+});

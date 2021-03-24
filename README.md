@@ -40,13 +40,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 -   [ ] Mention two parts of Express that you learned about this week.
 
+        Express allows for multiple route handlers. That means that endpoints can be defined on separate routers as opposed to all being defined in the server file. This makes the code easier to read and navigate. Express comes with middleware packages included in it, like the JSON parser. This built-in middleware makes it possible to extend the functionality of Express without having to download third-party middleware.
+
 -   [ ] Describe Middleware?
+
+        Middleware is a function that intercepts a process, runs some code on it, and either continues or stops the original process depending on the result of the code it ran. It runs in between receiving the request from the client and sending back the response from the server.
 
 -   [ ] Describe a Resource?
 
+        A resource is data that the database serves to the client. It could be information on a user, a comment, data about a truck, or any other type of data. The client can usually add, remove, or change the resources on a database.
+
 -   [ ] What can the API return to help clients know if a request was successful?
 
+        The API can send back an HTTP status code like 200, 201, or 204, or the API could send a JSON message telling the client that their request was successful. If a resource was being added, updated, or deleted, the API could also send the resource back as a JSON object.
+
 -   [ ] How can we partition our application into sub-applications?
+
+        We can use routers to split up our application. Each URL path can have its own router with its own endpoints. These routers operate like little sub-applications, which makes it easier to manage the whole application.
 
 ## Minimum Viable Product
 
